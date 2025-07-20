@@ -1,7 +1,9 @@
 import { Router } from "express";
-import { getAllProductsController } from "./product.controller";
+import { createProductController, getAllProductsController } from "./product.controller";
 
 export const productRoute = Router()
 
 productRoute.get('/getProducts', getAllProductsController)
+
+productRoute.post("/create-product",createProductController)
 

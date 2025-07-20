@@ -9,13 +9,33 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getAllProductsController = void 0;
+exports.createProductController = exports.getAllProductsController = void 0;
+const product_model_1 = require("./product.model");
 const getAllProductsController = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    var _a, _b;
+    const pageNumber = Number((_a = req === null || req === void 0 ? void 0 : req.query) === null || _a === void 0 ? void 0 : _a.page);
+    const limitValue = Number((_b = req.query) === null || _b === void 0 ? void 0 : _b.limit);
+    const skipValue = (pageNumber - 1) * limitValue;
     try {
-        res.status(200).json({ message: "All products fetched successfully", });
+        const totalData = yield product_model_1.productModel.find({});
+        const finding = yield product_model_1.productModel.find({}).select('').skip(skipValue).limit(limitValue);
+        res.status(200).json({
+            message: "All products fetched successfully",
+            response: { totalData: totalData.length, data: finding }
+        });
     }
     catch (error) {
         next(error);
     }
 });
 exports.getAllProductsController = getAllProductsController;
+const createProductController = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const creating = yield product_model_1.productModel.create(req.body);
+        res.status(200).json({ message: "product create successfully", data: creating });
+    }
+    catch (error) {
+        next(error);
+    }
+});
+exports.createProductController = createProductController;

@@ -27,8 +27,7 @@ const productSchema = new Schema<Tproduct>({
         required: [true, 'Product stock is required'],
         min: [10, 'Product stock cannot be negative'],
     },
-    }, {
-    timestamps: true, 
+    
 })
 
-export const productModel = mongoose.model<Tproduct>('Products', productSchema);
+export const productModel = mongoose.model<Tproduct>('products', productSchema);

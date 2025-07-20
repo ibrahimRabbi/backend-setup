@@ -51,7 +51,5 @@ const productSchema = new mongoose_1.Schema({
         required: [true, 'Product stock is required'],
         min: [10, 'Product stock cannot be negative'],
     },
-}, {
-    timestamps: true,
 });
-exports.productModel = mongoose_1.default.model('Products', productSchema);
+exports.productModel = mongoose_1.default.model('products', productSchema);

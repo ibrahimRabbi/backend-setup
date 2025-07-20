@@ -19,13 +19,20 @@ const globalError_1 = require("./app/middleware/globalError");
 const notFound_1 = require("./app/middleware/notFound");
 const routes_1 = require("./app/routes");
 const mongoose_1 = __importDefault(require("mongoose"));
+// import http from 'http'
+// import { Server } from 'socket.io';
 const app = (0, express_1.default)();
+// const httpServer = http.createServer(app)
 app.use((0, cors_1.default)());
 app.use(express_1.default.json());
 app.use('/api/v1', routes_1.router);
+// const io = new Server(httpServer);
+// io.on('connection', (socket) => {
+//     console.log('socekt connected with client')
+// })
 function main() {
     return __awaiter(this, void 0, void 0, function* () {
-        yield mongoose_1.default.connect('mongodb://localhost:27017/practice');
+        yield mongoose_1.default.connect('mongodb+srv://snapSale:snapSale1122@cluster0.oqkryfl.mongodb.net/table-practice?retryWrites=true&w=majority&appName=Cluster0');
         app.listen(envData_1.default.port, () => {
             console.log(`Server is running on port ${envData_1.default.port} in ${envData_1.default.nodeEnv} mode`);
         });

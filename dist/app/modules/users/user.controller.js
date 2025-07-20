@@ -8,29 +8,27 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getUserController = exports.createUserController = void 0;
 const user_model_1 = require("./user.model");
-const createUserController = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    try {
-        const createUser = yield user_model_1.userModel.create(req.body);
-        res.status(200).json({
-            success: true,
-            message: "User created successfully",
-            data: createUser
-        });
-    }
-    catch (error) {
-        next(error);
-    }
-});
-exports.createUserController = createUserController;
-const getUserController = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+const catchAsync_1 = __importDefault(require("../../utils/catchAsync"));
+exports.createUserController = (0, catchAsync_1.default)((req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    console.log(req.body);
+    // const createUser = await userModel.create(req.body);
+    res.status(200).json({
+        success: true,
+        message: "User created successfully",
+        data: 'hello'
+    });
+}));
+exports.getUserController = (0, catchAsync_1.default)((req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const finding = yield user_model_1.userModel.find();
     res.status(200).json({
         success: true,
         message: "User retrive successfully",
         data: finding
     });
-});
-exports.getUserController = getUserController;
+}));
